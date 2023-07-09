@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+          <template id="solid.playground" name="Awesome T-Shirt thank you">
+            <html>
+                <head>
+                    <t t-call-assets="solid.assets_playground"/>
+                </head>
+
+                <body>
+                </body>
+            </html>
+          </template>
+    </data>
+</odoo>

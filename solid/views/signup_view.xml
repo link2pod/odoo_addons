@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Overrides auth_signup.fields: https://github.com/odoo/odoo/blob/06019f30d0f0abbf4c2cabf5d2ef3b073e5cdafb/addons/auth_signup/views/auth_signup_login_templates.xml#L12C0-L37C0 -->
+    <template id="solid.auth_signup_fields" inherit_id="auth_signup.fields">
+
+        <!-- Add Pod Name field after Your Name -->
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
+            <div class="form-group field-podName">
+                <label for='podName'>Pod Name</label>
+                <input type="text" name="podName" id="podName" class="form-control form-control-sm" required="required" placeholder="e.g. JohnsPod" />
+            </div>
+        </xpath>
+
+    </template>
+    <template id="solid.auth_signup_signup" inherit_id="auth_signup.signup">
+        <!-- TODO implement better error text
+            Append custom error text to error message 
+            -->
+        <xpath expr="//p[@role='alert']" position="inside">
+            <p>test</p>
+        </xpath>
+    </template>
+</odoo>
+
