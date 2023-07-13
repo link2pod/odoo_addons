@@ -50,7 +50,6 @@
             'web/static/src/core/browser/browser.js',
             'web/static/src/core/registry.js',
             'web/static/src/core/assets.js',
-            'web/static/src/search/layout.js',
             'solid/static/src/**/*',
         ],
     }
