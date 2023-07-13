@@ -2,7 +2,7 @@
     <template id="solid.dashboard_page">
         <html>
             <head>
-                <t t-call-assets="solid.assets_dashboard"/>
+                <title>Solid Dashboard</title>
             </head>
 
             <body>

@@ -1,5 +1,7 @@
 from odoo import http
 from odoo.http import request, route, Response
+import logging
+_solid_logger = logging.getLogger(__name__)
 
 """
 class OwlPlayground(http.Controller):
@@ -20,6 +22,16 @@ class SolidDashboard(http.Controller):
     def show_subscription(self):
         qcontext = request.params.copy()
         return request.render('solid.subscription_page')
+
+    @http.route('/my/statistics', type='json', auth='user')
+    def get_statistics(self):
+        user_id = request.env.context.get('uid')
+        _solid_logger.info("request.env: %s\nuser_id: %s", request.env, user_id)
+
+        result = {
+            "user_id": user_id,
+        }
+        return result
     
 
 
