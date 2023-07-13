@@ -25,17 +25,24 @@ so that the web_auth_signup handler for '/web/signup' (https://github.com/odoo/o
 '''
 class ExtensionAuthSignupHome(AuthSignupHome):
 
+    # Redirect user to dashboard
+    @http.route('/web/login_successful', type='http', auth='user', website=True, sitemap=False)
+    def login_successful_external_user(self, **kwargs):
+        uid = request.env.user.id
+        #print("uid", uid)
+        return request.redirect('/dashboard')
+
     # override do_signup(self, qcontext)
     def do_signup(self, qcontext):
-        print("in dosignup")
+        #print("in dosignup")
         ''' Overall process:
         Step 1: Create WebID for user on a solid server
         Step 2: Create Record on the Odoo database for res.partners
         '''
         web_id = self.register_web_id(qcontext=qcontext)
-        #print("webId", webId) #debug
+        ##print("webId", webId) #debug
         qcontext['webId']=web_id
-        #print("new qcontext",qcontext)
+        ##print("new qcontext",qcontext)
         
         """ Signup with values. Adapted from original do_signup code: https://github.com/odoo/odoo/blob/91f970fdfd8136e303b7052d690d8997f0278f24/addons/auth_signup/controllers/main.py#L150C35-L154C32 """
         values = self._prepare_signup_values(qcontext)
@@ -50,12 +57,13 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
         #register_endpoint = 'http://localhost:8000/idp/register/'
-        base_server_url = 'http://172.17.0.4:8000/'
+        #base_server_url = 'http://172.17.0.4:8000/'
+        base_server_url = 'https://css.link168.win/'
         register_endpoint = base_server_url+'idp/register/'
         credentials_endpoint = base_server_url+'idp/credentials/'
         
 
-        print("in register_web_id")
+        #print("in register_web_id")
         # Check if account with email already exists
         credential_result = requests.post(
             url=credentials_endpoint,
@@ -64,7 +72,7 @@ class ExtensionAuthSignupHome(AuthSignupHome):
                 'password': '\n',
             }
         )
-        print("credentials", credential_result, credential_result.content) #debugging purposes
+        #print("credentials", credential_result, credential_result.content) #debugging purposes
 
         if (credential_result.status_code == 200 
             or credential_result.json()['message'] == 'Incorrect password'
@@ -82,13 +90,13 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         values['createPod'] = True
         values['register'] = True
         
-        print("values", values) #debugging purposes
+        #print("values", values) #debugging purposes
         register_result = requests.post(
             url=register_endpoint,
             json=values,
         )
 
-        print("register result:", register_result, register_result.content) # Debugging
+        #print("register result:", register_result, register_result.content) # Debugging
 
         # Handle potential errors when creating webID
         if (register_result.status_code!=200): 
@@ -99,7 +107,7 @@ class ExtensionAuthSignupHome(AuthSignupHome):
             
             raise SignupError(_(message))
         register_result_json = register_result.json()
-        print("content json", register_result_json) #debug
+        #print("content json", register_result_json) #debug
         
         web_id = register_result_json['webId']
         #webId = "http://somewhere/test/profile/card#me"

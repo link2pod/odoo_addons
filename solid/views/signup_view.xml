@@ -12,6 +12,17 @@
         </xpath>
 
     </template>
+    <!-- Overrides web.login redirect
+        Refer to https://github.com/maestrano/odoo/blob/2abc65859998b8602f613a0ee965b3b6fb0d1724/addons/web/views/webclient_templates.xml#L288
+    <template id="solid.web_login" inherit_id="web.login">
+
+        <xpath expr="//input[@name='redirect']" position="replace">
+            <input type="hidden" name="redirect" value="/dashboard"/>
+        </xpath>
+
+    </template>
+
+    -->
     <template id="solid.auth_signup_signup" inherit_id="auth_signup.signup">
         <!-- TODO implement better error text
             Append custom error text to error message 

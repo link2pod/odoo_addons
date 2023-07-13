@@ -1,14 +1,31 @@
 <odoo>
-    <data>
-          <template id="solid.playground" name="Awesome T-Shirt thank you">
-            <html>
-                <head>
-                    <t t-call-assets="solid.assets_playground"/>
-                </head>
+    <template id="solid.dashboard_page">
+        <html>
+            <head>
+                <t t-call-assets="solid.assets_dashboard"/>
+            </head>
 
-                <body>
-                </body>
-            </html>
-          </template>
-    </data>
+            <body>
+                <t t-call="portal.frontend_layout">
+                    <div id="dashboard_content">
+                    </div>
+                </t>
+            </body>
+        </html>
+    </template>
+    <template id="solid.subscription_page">
+        <html>
+            <head>
+                <!--
+                    <t t-call-assets="solid.assets_subscription"/>
+                    -->
+            </head>
+
+            <body>
+                <t t-call="portal.frontend_layout">
+                    Subscription page
+                </t>
+            </body>
+        </html>
+    </template>
 </odoo>

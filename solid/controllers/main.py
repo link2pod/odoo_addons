@@ -1,19 +1,28 @@
 from odoo import http
 from odoo.http import request, route, Response
 
-# Render root website pages  (i.e. GET request to /solid/playground, /signup)
-
-class SolidPlayground(http.Controller):
-    """ Renders the owl playground page """
-    @http.route(['/solid/playground'], type='http', auth='public')
+"""
+class OwlPlayground(http.Controller):
+    @http.route(['/owl_playground/playground'], type='http', auth='public')
     def show_playground(self):
-        return request.render('solid.playground')
+        Renders the owl playground page
+        return request.render('owl_playground.playground')
+        """
+
+# Render root website pages  (i.e. GET request to /dashboard)
+class SolidDashboard(http.Controller):
+    @http.route(['/my/solid-dashboard'], type='http', auth='public', website=True)
+    def show_dashboard(self):
+        qcontext = request.params.copy()
+        return request.render('solid.dashboard_page')
+
+    @http.route(['/my/subscription'], type='http', auth='public', website=True)
+    def show_subscription(self):
+        qcontext = request.params.copy()
+        return request.render('solid.subscription_page')
     
-    """ Renders the signup page """
-    @http.route(['/signup'], type='http', auth='public')
-    def show_signup_page(self):
-        #return Response(status=200,response="working")
-        return request.render('solid.signup_page')
+
+
 
     
 

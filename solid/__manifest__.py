@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Solid",
+    'name': "solid",
 
     'summary': """
-        Play with Owl in this playground module""",
+        Link your database to your solid server. 
+        """,
 
     'description': """
-        Play with Owl in this playground module
+        Link your database to your solid server. 
+        Add's a web_id field to the res.users model. 
+        Integrate webId creation from a solid server to the form at /web/signup.
     """,
 
-    'author': "Odoo",
-    'website': "https://www.odoo.com",
+    'author': "Link2.ca",
+    'website': "https://link2.ca",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -19,16 +22,17 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'web', 'auth_signup'],
+    'depends': ['base', 'web', 'auth_signup','portal'],
     'application': True,
     'installable': True,
     'data': [
         'views/templates.xml',
+        'views/portal.xml',
         # overrides auth_signup.fields
         'views/signup_view.xml'
     ],
     'assets': {
-        'solid.assets_playground': [
+        'solid.assets_dashboard': [
             # bootstrap
             ('include', 'web._assets_helpers'),
             'web/static/src/scss/pre_variables.scss',
@@ -46,6 +50,10 @@
             'web/static/src/core/browser/browser.js',
             'web/static/src/core/registry.js',
             'web/static/src/core/assets.js',
+            'web/static/src/search/layout.js',
+            'solid/static/src/**/*',
+        ],
+        'web.assets_backend': [
             'solid/static/src/**/*',
         ],
     }
