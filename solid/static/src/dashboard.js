@@ -10,7 +10,10 @@ export class Dashboard extends Component {
     setup() {
         console.log(this,session)
 
-        
+        // args = [route,params,settings={}]
+        const statistics = session.rpc('/my/statistics')
+        console.log(statistics)
+        statistics.then((stats) => console.log(stats))
         /*
         this.rpc = useService("rpc"); // for calls to the server
         /*

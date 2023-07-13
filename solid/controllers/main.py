@@ -26,11 +26,12 @@ class SolidDashboard(http.Controller):
     @http.route('/my/statistics', type='json', auth='user')
     def get_statistics(self):
         user_id = request.env.context.get('uid')
-        _solid_logger.info("request.env: %s\nuser_id: %s", request.env, user_id)
+        _solid_logger.debug("request.env: %s, user_id: %s", request.env, user_id)
 
         result = {
             "user_id": user_id,
         }
+
         return result
     
 
