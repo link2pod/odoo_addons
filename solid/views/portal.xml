@@ -31,10 +31,6 @@
         -->
     </template>
 
-    <template id="solid.portal_layout">
-        <p>before</p>
-        <t t-call="portal.portal_my_home"/>
-    </template>
 </odoo>
 
 

@@ -1,8 +1,8 @@
 /** @odoo-module **/
 
 import { Component } from "@odoo/owl";
-import { Layout } from "@web/search/layout";
-import { getDefaultConfig } from "@web/views/view";
+//import { Layout } from "@web/search/layout";
+//import { getDefaultConfig } from "@web/views/view";
 
 export class Dashboard extends Component {
     setup() {
@@ -12,5 +12,5 @@ export class Dashboard extends Component {
     }
 }
 
-Dashboard.components = { Layout };
+//Dashboard.components = { Layout };
 Dashboard.template = "solid.dashboard";

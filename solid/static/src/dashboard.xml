@@ -2,19 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="solid.dashboard" owl="1">
-        <Layout display="display">
-            <t t-set-slot="control-panel-bottom-left">
-            Hello owl
-            </t>
-        </Layout>
-        <!--
         <div class="p-3">
             dashboard placeholder 
             <div>
                 Permissions manager 
             </div>
         </div>
-        -->
     </t>
 
 </templates>

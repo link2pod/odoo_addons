@@ -53,8 +53,5 @@
             'web/static/src/search/layout.js',
             'solid/static/src/**/*',
         ],
-        'web.assets_backend': [
-            'solid/static/src/**/*',
-        ],
     }
 }
