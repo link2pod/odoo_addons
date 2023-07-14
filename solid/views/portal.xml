@@ -30,6 +30,12 @@
         <xpath expr="//div[hasclass('o_portal_no_doc_message')]" position="replace" />
         -->
     </template>
+    <template id="solid.portal_layout" inherit_id="portal.portal_layout">
+        <xpath expr="//div[hasclass('o_portal_my_details')]" position="after">
+            <p>web_id: <t t-esc="user_id.web_id" />
+            </p>
+        </xpath>
+    </template>
 
 </odoo>
 
