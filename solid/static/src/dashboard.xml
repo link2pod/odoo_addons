@@ -5,8 +5,7 @@
         <div class="p-3">
             dashboard placeholder 
             <div>
-                <h3>details</h3>
-                <p>webId: <t t-esc="web_id" /></p>
+                <p>webId: <t t-esc="state.web_id" /></p>
             </div>
             <div>
                 Permissions manager 

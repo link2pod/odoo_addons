@@ -7,6 +7,9 @@
 
             <body>
                 <t t-call="portal.frontend_layout">
+                    <h3>details</h3>
+                    <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
+                    <t t-esc="user_id.web_id" />
                     <div id="dashboard_content">
                     </div>
                 </t>

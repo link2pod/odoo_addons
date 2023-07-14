@@ -5,6 +5,8 @@ from odoo.addons.auth_signup.models.res_users import SignupError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
 import requests
 import werkzeug
+import logging
+_logger = logging.getLogger(__name__)
 
 '''
 parameter used for login/signup
@@ -25,15 +27,18 @@ so that the web_auth_signup handler for '/web/signup' (https://github.com/odoo/o
 '''
 class ExtensionAuthSignupHome(AuthSignupHome):
 
+    '''
     # Redirect user to dashboard
     @http.route('/web/login_successful', type='http', auth='user', website=True, sitemap=False)
     def login_successful_external_user(self, **kwargs):
         uid = request.env.user.id
         #print("uid", uid)
         return request.redirect('/dashboard')
+    '''
 
     # override do_signup(self, qcontext)
     def do_signup(self, qcontext):
+        _logger.debug("in do_signup %s", qcontext)
         #print("in dosignup")
         ''' Overall process:
         Step 1: Create WebID for user on a solid server
@@ -41,12 +46,14 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         '''
         web_id = self.register_web_id(qcontext=qcontext)
         ##print("webId", webId) #debug
-        qcontext['webId']=web_id
+        qcontext['web_id']=web_id
+        _logger.debug("qcontext %s, web_id %s", qcontext, web_id)
         ##print("new qcontext",qcontext)
         
         """ Signup with values. Adapted from original do_signup code: https://github.com/odoo/odoo/blob/91f970fdfd8136e303b7052d690d8997f0278f24/addons/auth_signup/controllers/main.py#L150C35-L154C32 """
         values = self._prepare_signup_values(qcontext)
         values['web_id'] = web_id # New: Add webId to values used to signup
+        _logger.debug("values %s", values)
         self._signup_with_values(qcontext.get('token'), values)
         request.env.cr.commit()
 
@@ -57,8 +64,8 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
         #register_endpoint = 'http://localhost:8000/idp/register/'
-        #base_server_url = 'http://172.17.0.4:8000/'
-        base_server_url = 'https://css.link168.win/'
+        base_server_url = 'http://172.17.0.4:8000/'
+        #base_server_url = 'https://css.link168.win/'
         register_endpoint = base_server_url+'idp/register/'
         credentials_endpoint = base_server_url+'idp/credentials/'
         
@@ -72,7 +79,7 @@ class ExtensionAuthSignupHome(AuthSignupHome):
                 'password': '\n',
             }
         )
-        #print("credentials", credential_result, credential_result.content) #debugging purposes
+        _logger.debug("credentials: %s, content: %s", credential_result, credential_result.content)
 
         if (credential_result.status_code == 200 
             or credential_result.json()['message'] == 'Incorrect password'
@@ -110,6 +117,7 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         #print("content json", register_result_json) #debug
         
         web_id = register_result_json['webId']
+        _logger.debug("web_id %s", web_id)
         #webId = "http://somewhere/test/profile/card#me"
         return web_id
 
