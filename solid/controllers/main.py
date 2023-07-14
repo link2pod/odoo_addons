@@ -13,10 +13,19 @@ class OwlPlayground(http.Controller):
 
 # Render root website pages  (i.e. GET request to /dashboard)
 class SolidDashboard(http.Controller):
-    @http.route(['/my/solid-dashboard'], type='http', auth='public', website=True)
+    @http.route(['/my/solid-dashboard'], type='http', auth='user', website=True)
     def show_dashboard(self):
         qcontext = request.params.copy()
-        return request.render('solid.dashboard_page')
+        _solid_logger.debug("request.env: ")
+        for i in request.env: 
+            _solid_logger.debug("%s", i)
+        _solid_logger.debug("web_id:%s, login:%s", request.env.user.web_id, request.env.user.login)
+        user = request.env.user
+        web_id = user.web_id
+        return request.render('solid.dashboard_page', {
+            'user': user,
+            'web_id': user.web_id,
+        })
 
     @http.route(['/my/subscription'], type='http', auth='public', website=True)
     def show_subscription(self):
@@ -26,10 +35,13 @@ class SolidDashboard(http.Controller):
     @http.route('/my/statistics', type='json', auth='user')
     def get_statistics(self):
         user_id = request.env.context.get('uid')
+
         _solid_logger.debug("request.env: %s, user_id: %s", request.env, user_id)
 
+        
+
         result = {
-            "user_id": user_id,
+            "web_id": request.env.user.web_id,
         }
 
         return result

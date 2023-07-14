@@ -7,21 +7,15 @@ const session = require("web.session");
 //import { getDefaultConfig } from "@web/views/view";
 
 export class Dashboard extends Component {
-    setup() {
+    async setup() {
         console.log(this,session)
+        console.log(session.user_context, session.userContext)
 
         // args = [route,params,settings={}]
-        const statistics = session.rpc('/my/statistics')
+        const statistics = await session.rpc('/my/statistics')
         console.log(statistics)
-        statistics.then((stats) => console.log(stats))
-        /*
-        this.rpc = useService("rpc"); // for calls to the server
-        /*
-        onWillStart(async () => {
-            const result = await this.rpc("/my/usage", {a: 1, b: 2});
-            console.log(result);
-        });
-        */
+        const web_id = statistics.web_id
+        this.web_id = web_id
     }
 }
 
