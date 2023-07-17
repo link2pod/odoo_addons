@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 parameter used for login/signup
 Refer to https://github.com/odoo/odoo/blob/16.0/addons/web/controllers/home.py#L22
 '''
-SIGN_UP_REQUEST_PARAMS.add('web_id')  # web-id not web_id because odoo convention model_id 
+SIGN_UP_REQUEST_PARAMS.add('web_id')  
 SIGN_UP_REQUEST_PARAMS.add('podName') 
 
 
@@ -63,8 +63,8 @@ class ExtensionAuthSignupHome(AuthSignupHome):
         # TODO move endpoint into environment variable
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
         #register_endpoint = 'https://solidserver.southafricanorth.cloudapp.azure.com/idp/register/'
-        #register_endpoint = 'http://localhost:8000/idp/register/'
-        base_server_url = 'http://172.17.0.4:8000/'
+        #base_server_url = 'http://localhost:8000/'
+        base_server_url = 'https://css.eastus2.cloudapp.azure.com/'
         #base_server_url = 'https://css.link168.win/'
         register_endpoint = base_server_url+'idp/register/'
         credentials_endpoint = base_server_url+'idp/credentials/'
