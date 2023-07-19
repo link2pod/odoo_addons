@@ -13,7 +13,7 @@
     """,
 
     'author': "Link2.ca",
-    'website': "https://link2.ca",
+    'website': "https://www.link2.ca",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -26,10 +26,10 @@
     'application': True,
     'installable': True,
     'data': [
-        'views/templates.xml',
+         'views/templates.xml',
         'views/portal.xml',
         # overrides auth_signup.fields
-        'views/signup_view.xml'
+         'views/signup_view.xml'
     ],
     'assets': {
         'web.assets_frontend': [
