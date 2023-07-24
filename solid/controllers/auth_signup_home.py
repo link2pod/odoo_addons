@@ -3,7 +3,6 @@ from odoo.http import request, route,Response
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.addons.auth_signup.models.res_users import SignupError
 from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS
-from dotenv import dotenv_values
 import requests
 import werkzeug
 import logging
@@ -62,7 +61,10 @@ class ExtensionAuthSignupHome(AuthSignupHome):
     def register_web_id(self, qcontext):
         # api endpoint to register a webID on a solid server
         # TODO move endpoint into environment variable
-        base_server_url = dotenv_values("../.env")["CSS_BASE_URL"]
+        base_server_url='http://css.eastus2.cloudapp.azure.com'      # Azure VM  (preferred)
+        #base_server_url='https://css.link168.win/'                   # Cloudflare (not working)
+        #base_server_url='http://css:1111/'                           # Default when using docker compose up
+        #base_server_url='http://localhost:3000/'                     # Default when running locally
         if (not base_server_url):
             _logger.error("Solid server not found. dotenv_values\n%s", dotenv_values("../.env"))
             raise SignupError(_("Solid Server not found")) 
