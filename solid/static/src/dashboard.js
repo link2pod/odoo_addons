@@ -9,7 +9,7 @@ const { useState } = owl;
 
 export class Dashboard extends Component {
     async setup() {
-        this.state = useState({web_id: "loading"})
+        this.state = useState({web_id: "loading", data_usage: "50% (test value)"})
         console.log(this,session)
         console.log(session.user_context, session.userContext)
 

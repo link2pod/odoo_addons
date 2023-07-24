@@ -3,12 +3,10 @@
 
     <t t-name="solid.dashboard" owl="1">
         <div class="p-3">
-            dashboard placeholder 
+            <h2> Account Summary </h2>
             <div>
-                <p>webId: <t t-esc="state.web_id" /></p>
-            </div>
-            <div>
-                Permissions manager 
+                <p>webId: <t t-esc="state.web_id" /> </p>
+                <p>DataUsage: <t t-esc="state.data_usage" /> </p>
             </div>
         </div>
     </t>

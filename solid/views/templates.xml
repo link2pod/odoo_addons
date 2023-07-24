@@ -7,10 +7,25 @@
 
             <body>
                 <t t-call="portal.frontend_layout">
-                    <h3>details</h3>
+                    <!-- 
+                    <h2>Account Summary</h2>
                     <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
                     <t t-esc="user_id.web_id" />
+                    -->
                     <div id="dashboard_content">
+                    </div>
+                    <h2> Application Library</h2>
+                    <div class="list-group mb-2">
+                        <a href="https://notepod-gpt.vercel.app/" target="_blank" title="Notepod-GPT" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                    Notepod-GPT
+                            <p>Edit and Create notes in your pod</p>
+                        </a>
+                        <!--
+                <a href="" title="Permission Manager" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                    Permission Manager
+                </a>
+
+                -->
                     </div>
                 </t>
             </body>
